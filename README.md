@@ -2,7 +2,7 @@
 ---
 
 # 🚀 DevOps Demo App
-
+![CI/CD](./ci-cd.jpeg)
 ## **Tema:** *“DevOps – Pensar como DevOps, construir, automatizar, entregar”*
 
 Este repositório foi criado para a sessão de **DevOps** com o objetivo de te ajudar a compreender e experimentar o **ciclo completo de desenvolvimento, automação e entrega de software**.

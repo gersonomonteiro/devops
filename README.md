@@ -283,12 +283,12 @@ docker restart nginx-devops
 ### 🌍 7.4 Testar no navegador
 
 Agora abre:  
-👉 [http://devops.local](http://backend.local)
+👉 [http://backend.local](http://backend.local)
 
 Se tudo estiver configurado corretamente, verás a tua aplicação a funcionar com o novo domínio local 🎉
 
 > 🧠 **Dica:**  
-> Este método é ótimo para simular ambientes reais (como `postgres.local`, `jenkins.local`, etc.) antes de configurar DNS de verdade em servidores.
+> Este método é ótimo para simular ambientes reais (como `nginx.local`, `jenkins.local`, etc.) antes de configurar DNS de verdade em servidores.
 
 ---
 

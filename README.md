@@ -266,7 +266,7 @@ server {
 }
 ```
 
-> 💡 Assim, o Nginx responderá apenas quando o pedido vier de `devops.local`.
+> 💡 Assim, o Nginx responderá apenas quando o pedido vier de `frontend.local` e `backend.local` .
 
 ---
 

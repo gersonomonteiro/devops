@@ -55,7 +55,7 @@ Abre o terminal e executa:
 ```bash
 git clone https://github.com/gersonomonteiro/devops.git
 
-cd /devops
+cd devops
 
 ```
 ---
@@ -215,7 +215,8 @@ devops-postgres      devops-postgres             Up 3 minutes
 
 Para tornar o ambiente mais realista, podes aceder à aplicação usando um **nome personalizado**, por exemplo:
 
-👉 http://devops.local
+👉 http://frontend.local
+👉 http://backend.local
 
 ---
 
@@ -231,7 +232,8 @@ O ficheiro `hosts` permite criar entradas de DNS locais no teu computador.
    ```
 3. No final do ficheiro, adiciona esta linha:
    ```
-   127.0.0.1   devops.local
+   127.0.0.1   frontend.local
+   127.0.0.1   backend.local
    ```
 4. Guarda e fecha o ficheiro.
 
@@ -244,16 +246,20 @@ Abre o ficheiro `nginx/default.conf` e altera a linha `server_name` para:
 ```nginx
 server {
     listen 80;
-    server_name devops.local;
+    server_name frontend.local;
 
     location / {
         proxy_pass http://host.docker.internal:3006;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
     }
+}
+server {
+    listen 80;
+    server_name backend.local;
 
-    location /api/ {
-        proxy_pass http://host.docker.internal:5006/api/;
+    location / {
+        proxy_pass http://host.docker.internal:5006/;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
     }
@@ -269,8 +275,7 @@ server {
 Depois de alterar o ficheiro, executa:
 
 ```bash
-docker compose -p jenkins-devops down 
-docker compose -p jenkins-devops up -d
+docker restart nginx-devops
 ```
 
 ---
@@ -278,12 +283,12 @@ docker compose -p jenkins-devops up -d
 ### 🌍 7.4 Testar no navegador
 
 Agora abre:  
-👉 [http://devops.local](http://devops.local)
+👉 [http://devops.local](http://backend.local)
 
 Se tudo estiver configurado corretamente, verás a tua aplicação a funcionar com o novo domínio local 🎉
 
 > 🧠 **Dica:**  
-> Este método é ótimo para simular ambientes reais (como `backend.local`, `frontend.local`, etc.) antes de configurar DNS de verdade em servidores.
+> Este método é ótimo para simular ambientes reais (como `postgres.local`, `jenkins.local`, etc.) antes de configurar DNS de verdade em servidores.
 
 ---
 
@@ -299,12 +304,12 @@ docker compose -p jenkins-devops down -v
 
 ## 💡 8️⃣ Revisão
 
-| Conceito            | Ferramenta     | Resultado                      |
-| ------------------- | -------------- | ------------------------------ |
-| Containerização     | Docker         | Aplicação isolada e portátil   |
-| Reverse Proxy       | Nginx          | Roteamento e acesso web        |
-| Integração Contínua | Jenkins        | Build e teste automatizado     |
-| Entrega Contínua    | Docker Compose | Deploy local automatizado      |
+| Conceito                | Ferramenta     | Resultado                      |
+| ------------------------| -------------- | ------------------------------ |
+| Containerização         | Docker         | Aplicação isolada e portátil   |
+| Reverse Proxy           | Nginx          | Roteamento e acesso web        |
+| Integração Contínua(CI) | Jenkins        | Build e teste automatizado     |
+| Entrega Contínua(CD)    | Docker Compose | Deploy local automatizado      |
 
 ---
 

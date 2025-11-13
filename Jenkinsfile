@@ -122,10 +122,10 @@ pipeline {
                     echo '📊 Informações da aplicação...'
                     sh '''
                         echo "=== URLs da Aplicação ==="
-                        echo "Frontend: http://host.docker.internal:3006"
-                        echo "Backend:  http://host.docker.internal:5006"
-                        echo "API Docs: http://host.docker.internal:5006/api/users"
-                        echo "Health:   http://host.docker.internal:5006/health"
+                        echo "Frontend: http://localhost:3006"
+                        echo "Backend:  http://localhost:5006"
+                        echo "Backend API users: http://localhost:5006/api/users"
+                        echo "Backend Health:   http://localhost:5006/health"
                         
                         echo "=== Logs Recentes ==="
                         docker-compose -p ${PROJECT_NAME} logs --tail=5
@@ -146,8 +146,8 @@ pipeline {
         }
         success {
             echo '✅ Pipeline concluído com sucesso!'
-            echo '🌍 Aplicação disponível em http://host.docker.internal:3006'
-            echo '🔗 API disponível em http://host.docker.internal:5006'
+            echo '🌍 Aplicação disponível em http://localhost:3006'
+            echo '🔗 API disponível em http://localhost:5006'
         }
         failure {
             echo '❌ Pipeline falhou. Verificar logs acima.'
